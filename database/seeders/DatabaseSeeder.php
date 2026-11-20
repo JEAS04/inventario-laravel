@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Demo account: password comes from the UserFactory default.
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            User::factory()->make(['name' => 'Test User', 'email' => 'test@example.com'])->getAttributes()
-        );
+        // Demo account: local default, or DEMO_USER_PASSWORD elsewhere (skipped if unset).
+        $demoPassword = app()->isLocal() ? env('DEMO_USER_PASSWORD', 'password') : env('DEMO_USER_PASSWORD');
+
+        if ($demoPassword) {
+            User::firstOrCreate(
+                ['email' => 'test@example.com'],
+                ['name' => 'Test User', 'password' => Hash::make($demoPassword), 'email_verified_at' => now()]
+            );
+        }
 
         $catalog = [
             'Electronics' => [
