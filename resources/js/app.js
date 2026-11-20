@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('table[id$="-table"]').forEach((table) => {
         new DataTable(table, {
             pageLength: 10,
+            language: {
+                search: 'Buscar:',
+                lengthMenu: 'Mostrar _MENU_ registros',
+                info: 'Mostrando _START_ a _END_ de _TOTAL_ registros',
+                infoEmpty: 'Mostrando 0 a 0 de 0 registros',
+                infoFiltered: '(filtrado de _MAX_ registros)',
+                zeroRecords: 'No se encontraron resultados',
+                emptyTable: 'No hay datos disponibles',
+                paginate: { first: 'Primero', last: 'Último', next: 'Siguiente', previous: 'Anterior' },
+            },
             columnDefs: [{ targets: -1, orderable: false, searchable: false }],
         });
     });
@@ -25,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'bar',
             data: {
                 labels,
-                datasets: [{ label: 'Units in stock', data: values, backgroundColor: '#4f46e5' }],
+                datasets: [{ label: 'Unidades en existencia', data: values, backgroundColor: '#4f46e5' }],
             },
             options: {
                 responsive: true,

@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Products</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Productos</h2>
             <div class="flex gap-2">
                 <a href="{{ route('reports.inventory') }}"
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-50">
-                    Download PDF
+                    Descargar PDF
                 </a>
                 <a href="{{ route('products.create') }}"
                     class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                    New product
+                    Nuevo producto
                 </a>
             </div>
         </div>
@@ -25,13 +25,13 @@
                 <table id="products-table" class="display w-full">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Name</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
                             <th>SKU</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
+                            <th>Categoría</th>
+                            <th>Precio (USD)</th>
+                            <th>Existencias</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,16 +46,16 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->sku }}</td>
                                 <td>{{ $product->category->name }}</td>
-                                <td>{{ number_format($product->price, 2) }}</td>
+                                <td>{{ number_format($product->price, 2, ',', '.') }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td class="whitespace-nowrap">
                                     <a href="{{ route('products.edit', $product) }}"
-                                        class="text-indigo-600 hover:underline">Edit</a>
+                                        class="text-indigo-600 hover:underline">Editar</a>
                                     <form method="POST" action="{{ route('products.destroy', $product) }}"
-                                        class="inline" onsubmit="return confirm('Delete this product?')">
+                                        class="inline" onsubmit="return confirm('¿Eliminar este producto?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="ml-3 text-red-600 hover:underline">Delete</button>
+                                        <button type="submit" class="ml-3 text-red-600 hover:underline">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

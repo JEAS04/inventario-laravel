@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         Category::create($data);
 
-        return redirect()->route('categories.index')->with('status', 'Category created.');
+        return redirect()->route('categories.index')->with('status', 'Categoría creada.');
     }
 
     public function show(Category $category): RedirectResponse
@@ -53,18 +53,18 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        return redirect()->route('categories.index')->with('status', 'Category updated.');
+        return redirect()->route('categories.index')->with('status', 'Categoría actualizada.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         if ($category->products()->exists()) {
             return redirect()->route('categories.index')
-                ->withErrors(['category' => 'Cannot delete a category that still has products.']);
+                ->withErrors(['category' => 'No se puede eliminar una categoría que aún tiene productos.']);
         }
 
         $category->delete();
 
-        return redirect()->route('categories.index')->with('status', 'Category deleted.');
+        return redirect()->route('categories.index')->with('status', 'Categoría eliminada.');
     }
 }

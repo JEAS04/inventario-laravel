@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect()->route('products.index')->with('status', 'Product created.');
+        return redirect()->route('products.index')->with('status', 'Producto creado.');
     }
 
     public function show(Product $product): RedirectResponse
@@ -64,7 +64,7 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('products.index')->with('status', 'Product updated.');
+        return redirect()->route('products.index')->with('status', 'Producto actualizado.');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('products.index')->with('status', 'Product deleted.');
+        return redirect()->route('products.index')->with('status', 'Producto eliminado.');
     }
 
     private function rules(?Product $product = null): array

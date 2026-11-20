@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Categories</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Categorías</h2>
             <a href="{{ route('categories.create') }}"
                 class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                New category
+                Nueva categoría
             </a>
         </div>
     </x-slot>
@@ -22,10 +22,10 @@
                 <table id="categories-table" class="display w-full">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Products</th>
-                            <th>Actions</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,12 +36,12 @@
                                 <td>{{ $category->products_count }}</td>
                                 <td class="whitespace-nowrap">
                                     <a href="{{ route('categories.edit', $category) }}"
-                                        class="text-indigo-600 hover:underline">Edit</a>
+                                        class="text-indigo-600 hover:underline">Editar</a>
                                     <form method="POST" action="{{ route('categories.destroy', $category) }}"
-                                        class="inline" onsubmit="return confirm('Delete this category?')">
+                                        class="inline" onsubmit="return confirm('¿Eliminar esta categoría?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="ml-3 text-red-600 hover:underline">Delete</button>
+                                        <button type="submit" class="ml-3 text-red-600 hover:underline">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

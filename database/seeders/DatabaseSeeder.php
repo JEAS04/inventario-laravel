@@ -25,25 +25,36 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // Earlier demo data was created in English; rename it so it is not duplicated.
+        $renamedCategories = [
+            'Electronics' => 'Electrónica',
+            'Office Supplies' => 'Papelería',
+            'Furniture' => 'Muebles',
+            'Cleaning' => 'Aseo',
+        ];
+        foreach ($renamedCategories as $old => $new) {
+            Category::where('name', $old)->update(['name' => $new]);
+        }
+
         $catalog = [
-            'Electronics' => [
-                ['Wireless Mouse', 'ELE-001', 18.90, 45],
-                ['Mechanical Keyboard', 'ELE-002', 74.50, 20],
-                ['USB-C Hub', 'ELE-003', 32.00, 33],
-                ['27" Monitor', 'ELE-004', 219.99, 8],
+            'Electrónica' => [
+                ['Mouse inalámbrico', 'ELE-001', 18.90, 45],
+                ['Teclado mecánico', 'ELE-002', 74.50, 20],
+                ['Hub USB-C', 'ELE-003', 32.00, 33],
+                ['Monitor de 27"', 'ELE-004', 219.99, 8],
             ],
-            'Office Supplies' => [
-                ['A4 Paper Ream', 'OFF-001', 4.75, 120],
-                ['Ballpoint Pens (box of 50)', 'OFF-002', 9.20, 60],
-                ['Desk Organizer', 'OFF-003', 12.40, 25],
+            'Papelería' => [
+                ['Resma de papel carta', 'OFF-001', 4.75, 120],
+                ['Bolígrafos (caja de 50)', 'OFF-002', 9.20, 60],
+                ['Organizador de escritorio', 'OFF-003', 12.40, 25],
             ],
-            'Furniture' => [
-                ['Ergonomic Chair', 'FUR-001', 159.00, 12],
-                ['Standing Desk', 'FUR-002', 329.00, 6],
+            'Muebles' => [
+                ['Silla ergonómica', 'FUR-001', 159.00, 12],
+                ['Escritorio ajustable', 'FUR-002', 329.00, 6],
             ],
-            'Cleaning' => [
-                ['Disinfectant 1L', 'CLE-001', 3.90, 80],
-                ['Microfiber Cloths (pack of 10)', 'CLE-002', 6.50, 40],
+            'Aseo' => [
+                ['Desinfectante 1 L', 'CLE-001', 3.90, 80],
+                ['Paños de microfibra (paquete de 10)', 'CLE-002', 6.50, 40],
             ],
         ];
 
@@ -51,10 +62,15 @@ class DatabaseSeeder extends Seeder
             $category = Category::firstOrCreate(['name' => $categoryName]);
 
             foreach ($products as [$name, $sku, $price, $stock]) {
-                Product::firstOrCreate(
+                $product = Product::firstOrCreate(
                     ['sku' => $sku],
                     ['category_id' => $category->id, 'name' => $name, 'price' => $price, 'stock' => $stock]
                 );
+
+                // Existing demo rows keep their price and stock; only the name is translated.
+                if (! $product->wasRecentlyCreated) {
+                    $product->update(['name' => $name]);
+                }
             }
         }
     }

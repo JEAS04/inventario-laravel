@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Inventory report</title>
+    <title>Informe de inventario</title>
     <style>
         body { font-family: DejaVu Sans, sans-serif; font-size: 12px; color: #111827; }
         h1 { font-size: 20px; margin-bottom: 4px; }
@@ -15,18 +15,18 @@
     </style>
 </head>
 <body>
-    <h1>Inventory report</h1>
-    <p class="meta">Generated {{ $generatedAt->format('Y-m-d H:i') }}</p>
+    <h1>Informe de inventario</h1>
+    <p class="meta">Generado el {{ $generatedAt->format('d/m/Y H:i') }} · Valores en USD</p>
 
     <table>
         <thead>
             <tr>
                 <th>SKU</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th class="num">Price</th>
-                <th class="num">Stock</th>
-                <th class="num">Value</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th class="num">Precio</th>
+                <th class="num">Existencias</th>
+                <th class="num">Valor</th>
             </tr>
         </thead>
         <tbody>
@@ -35,18 +35,18 @@
                     <td>{{ $product->sku }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td class="num">{{ number_format($product->price, 2) }}</td>
+                    <td class="num">{{ number_format($product->price, 2, ',', '.') }}</td>
                     <td class="num">{{ $product->stock }}</td>
-                    <td class="num">{{ number_format($product->price * $product->stock, 2) }}</td>
+                    <td class="num">{{ number_format($product->price * $product->stock, 2, ',', '.') }}</td>
                 </tr>
             @empty
-                <tr><td colspan="6">No products registered.</td></tr>
+                <tr><td colspan="6">No hay productos registrados.</td></tr>
             @endforelse
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5">Total inventory value</td>
-                <td class="num">{{ number_format($totalValue, 2) }}</td>
+                <td colspan="5">Valor total del inventario</td>
+                <td class="num">{{ number_format($totalValue, 2, ',', '.') }}</td>
             </tr>
         </tfoot>
     </table>

@@ -18,6 +18,6 @@ class ReportController extends Controller
             'generatedAt' => now(),
         ]);
 
-        return $pdf->download('inventory-report.pdf');
+        return $pdf->download('informe-inventario.pdf');
     }
 }

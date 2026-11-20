@@ -24,14 +24,14 @@
                     @auth
                         <a href="{{ route('dashboard') }}"
                             class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                            Dashboard
+                            Panel
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Log in</a>
+                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Iniciar sesión</a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
                                 class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                                Register
+                                Registrarse
                             </a>
                         @endif
                     @endauth
@@ -45,7 +45,7 @@
 
         <footer class="border-t border-gray-100 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-gray-500">
-                &copy; {{ date('Y') }} {{ config('app.name', 'Inventory') }}. Web applications and services project.
+                &copy; {{ date('Y') }} {{ config('app.name', 'Inventory') }}. Proyecto de Aplicaciones y Servicios Web.
             </div>
         </footer>
     </body>
